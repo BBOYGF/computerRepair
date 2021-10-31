@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
+@MapperScan("com.computer_repair.mapper")
 public class Main {
 
     public static void main(String[] args) {
@@ -43,7 +45,8 @@ public class Main {
         globalConfig.setSwagger2(true);
         generator.setGlobalConfig(globalConfig);
         //配置数据源
-        DataSourceConfig dataSourceConfig = new DataSourceConfig();//需要修改
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        //需要修改
         dataSourceConfig.setUrl("jdbc:mysql://101.34.107.75:3306/computer_repair_shop?userUnicode=true&characterEncoding=utf-8");
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
@@ -53,7 +56,8 @@ public class Main {
         generator.setDataSource(dataSourceConfig);
         //包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.computer_repair")// 需要修改
+        // 需要修改
+        pc.setParent("com.computer_repair")
                 .setEntity("pojo")
                 .setMapper("mapper")
                 .setService("service")
@@ -107,7 +111,7 @@ public class Main {
         System.out.println(help.toString());
         if (scanner.hasNext()) {
             String ipt = scanner.next();
-            if (ipt != null || ipt.equals("")) {
+            if (ipt != null || "".equals(ipt)) {
                 return ipt;
             }
         }
